@@ -7,7 +7,12 @@ authors = [
     { name = "Jad Baida", email = "jad.bayda@net.usj.edu.lb" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.3",
+    "pandas>=3.0.6",
+    "seaborn>=0.13.2",
+]
 
 [project.scripts]
 titanic-lab = "titanic_lab:main"
@@ -15,3 +20,10 @@ titanic-lab = "titanic_lab:main"
 [build-system]
 requires = ["uv_build>=0.12.17,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.3.0",
+    "jupyter>=1.1.1",
+    "matplotlib-inline>=0.2.2",
+]
