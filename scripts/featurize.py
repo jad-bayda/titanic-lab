@@ -45,7 +45,6 @@ def featurize(df):
     # +1 represents the passenger themself
     df["Family_size"] = df["SibSp"] + df["Parch"] + 1
 
-    df["IsAlone"] = (df["Family_size"] == 1).astype(int)
 
     # Convert family size into Alone, Small, or Large
     df["Family_size"] = df["Family_size"].apply(family_size)
