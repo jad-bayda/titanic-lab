@@ -6,12 +6,19 @@ from pathlib import Path
 import pandas as pd
 
 from titanic_lab.models.logistic_regression import LogisticRegressionModel
+from titanic_lab.models.random_forest import RandomForestModel
+from titanic_lab.models.xgboost_model import XGBoostModel
 
 
 def build_parser():
     parser = argparse.ArgumentParser(description="Train Titanic survival model")
     parser.add_argument("--input", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument(
+        "--model",
+        choices=["logistic", "random_forest", "xgboost"],
+        default="logistic"
+    )
     return parser
 
 
@@ -26,8 +33,13 @@ def main():
     # Convert categorical columns into numeric dummy variables
     X = pd.get_dummies(X, drop_first=True)
 
-    # Initialize the Logistic Regression model class
-    model = LogisticRegressionModel()
+    # Select the model
+    if args.model == "logistic":
+        model = LogisticRegressionModel()
+    elif args.model == "random_forest":
+        model = RandomForestModel()
+    else:
+        model = XGBoostModel()
 
     # Train the model
     model.train(X, y)
@@ -39,6 +51,7 @@ def main():
     with open(output_path, "wb") as f:
         pickle.dump(model, f)
 
+    print(f"Model: {args.model}")
     print(f"Model saved to {output_path}")
 
 

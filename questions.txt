@@ -1,0 +1,11 @@
+MLOps Lab - Scripts to Classes
+
+1- What can we still improve?
+
+We can improve our project by testing different models like Logistic Regression, Random Forest, and XGBoost to see which one gives better results.
+
+We can also try changing some model parameters and improving the features to get better predictions.
+
+Another thing we can do is use cross-validation to check if our models perform well on different parts of the dataset.
+
+Finally, we can add some automatic tests to make sure everything works correctly.
