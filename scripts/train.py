@@ -1,9 +1,11 @@
+
 import argparse
 import pickle
 from pathlib import Path
 
 import pandas as pd
-from sklearn.linear_model import LogisticRegression
+
+from titanic_lab.models.logistic_regression import LogisticRegressionModel
 
 
 def build_parser():
@@ -24,12 +26,16 @@ def main():
     # Convert categorical columns into numeric dummy variables
     X = pd.get_dummies(X, drop_first=True)
 
-    model = LogisticRegression(max_iter=1000)
-    model.fit(X, y)
+    # Initialize the Logistic Regression model class
+    model = LogisticRegressionModel()
+
+    # Train the model
+    model.train(X, y)
 
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # Save the trained model
     with open(output_path, "wb") as f:
         pickle.dump(model, f)
 
