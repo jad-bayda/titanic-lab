@@ -1,3 +1,4 @@
+
 import argparse
 import pickle
 import pandas as pd
@@ -19,14 +20,14 @@ def main():
     X = df.drop(columns=["Survived"])
 
     # Convert categorical columns to numeric
-    X = pd.get_dummies(X)
+    X = pd.get_dummies(X, drop_first=True)
 
     # Load trained model
     with open(args.model, "rb") as f:
         model = pickle.load(f)
 
-    # Make sure columns match the columns used during training
-    X = X.reindex(columns=model.feature_names_in_, fill_value=0)
+    # Match columns with the columns used during training
+    X = X.reindex(columns=model.model.feature_names_in_, fill_value=0)
 
     # Make predictions
     predictions = model.predict(X)
